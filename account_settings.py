@@ -10,6 +10,8 @@ www.txtlocal.com ==> api-account {
 www.twillo.com ==> api-account {
 }
 """
+import json
+
 class TextLocal:
     def __init__(self, api_key,username=None, password=None,Sender=None):
         self.api_key = api_key
@@ -29,8 +31,21 @@ class TextLocal:
         for key , value in info_account.items():
             print(f"{key} is {value}")
 
-class twillo_config:
-    pass 
+class Nexmo_config:
+    def __init__(self, api_key, secret_key, Owner):
+        
+        self.api = api_key
+        self.secret_key = secret_key
+        self.Owner = Owner
+    def credential(self):
+        data_api = {
+                "api_key": self.api,
+                "secret_key":self.secret_key,
+                "Owner-Sender":self.Owner
+                }
+        for key , value in data_api.items():
+            print(f"{key} is :{value}")
+     
 
 
 
