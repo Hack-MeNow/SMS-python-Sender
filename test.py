@@ -8,8 +8,8 @@ Sms = vonage.Sms(Client)
 Sender = "Youness"
 respond_data = Sms.send_message({
             "from":Sender,
-            "to":"212640783798",
-            "text":"test youness APi Sender only testing now "
+            "to":"212674105984",
+            "text":"test youness"
 })
 
 if respond_data["messages"][0]["status"] == "0":

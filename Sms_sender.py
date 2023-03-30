@@ -1,23 +1,47 @@
-from Senders import * 
-from account_settings import * 
+from providers.Senders import * 
+from providers.account_settings import * 
 from configparser import ConfigParser 
+from termcolor import colored
+import sys  
+import random
+import time
 
-# Read file Credential APIs 
-config = ConfigParser()
-config.read("APIs_Accounts_Credentials.cfg")
-# get the APIs Credential
-Nexmo_api = config['Nexmo_api']['api_key']
-Nexmo_secret = config['Nexmo_api']['secret_key']
-Nexmo_Sender = config['Nexmo_api']['sender']
-print(Nexmo_api)
-info_cred = Nexmo_config(Nexmo_api,Nexmo_secret,Nexmo_Sender).credential()
 
-# Provider sending to chose
-message = "hey haytam this is only the test APIs in morocco only now"
-print(message)
-list_number = 'list_number.txt'
-Provider = NexmoSender(Nexmo_api,Nexmo_secret,Nexmo_Sender,message,list_number)
-Provider.sms_sender() 
+def Screen_log():
+    color_logo = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+    random_color = random.choice(color_logo)
+    print(colored(
+    """
+
+██╗░░██╗██╗░░░██╗██████╗░██████╗░░█████╗░░░░░░░░██████╗███╗░░░███╗░██████╗
+██║░░██║╚██╗░██╔╝██╔══██╗██╔══██╗██╔══██╗░░░░░░██╔════╝████╗░████║██╔════╝
+███████║░╚████╔╝░██║░░██║██████╔╝███████║█████╗╚█████╗░██╔████╔██║╚█████╗░
+██╔══██║░░╚██╔╝░░██║░░██║██╔══██╗██╔══██║╚════╝░╚═══██╗██║╚██╔╝██║░╚═══██╗
+██║░░██║░░░██║░░░██████╔╝██║░░██║██║░░██║░░░░░░██████╔╝██║░╚═╝░██║██████╔╝
+╚═╝░░╚═╝░░░╚═╝░░░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝░░░░░░╚═════╝░╚═╝░░░░░╚═╝╚═════╝░
+
+Created by Deep-Matter
+Uploaded in term use educational Purpose 
+use cases of this tool , the creator not responsbel for any illegal action
+    """,
+random_color))
+    time.sleep(1)
+
+def main():
+    Screen_log()
+    print("1: Send SMS with different API providers")
+    print("2: Help")
+    print("3: more info about APIs send SMS-Providers Config")
+    Choices = print("\n Please insert the chose: ")
+    
+    
+
+if __name__ == "__main__":
+    main()  
+    
+
+
+
 
 
 
