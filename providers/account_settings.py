@@ -29,7 +29,7 @@ class TextLocal:
                 'Sender': self.Sender
                 }
         for key , value in info_account.items():
-            print(f"{key} is {value}")
+            print(f"{key} is {value} \n")
 
 class Nexmo_config:
     def __init__(self, api_key, secret_key, Owner):
@@ -44,11 +44,23 @@ class Nexmo_config:
                 "Owner-Sender":self.Owner
                 }
         for key , value in data_api.items():
-            print(f"{key} is :{value}")
-     
+            print(f"{key} is :{value} \n")
+class TwilloAccount:
+    def __init__(self,apikey,api_auth,twillo_number):
+        self.api_key =  apikey
+        self.api_auth = api_auth
+        self.twillo_number = twillo_number
+    def credential(self):
+        info_account = {
+                'api_key':self.api_key,
+                'api_auth': self.api_auth,
+                'twillo number': self.twillo_number
+                }
+        for ket , value in info_account.items():
+            print(f"{key} : {value}")
 
-
-
+class TextBletAccount:
+    pass
         
 
 

@@ -3,8 +3,11 @@ import urllib.parse as parse
 import requests 
 from tqdm import tqdm
 import vonage
+import json
+from twillo.rest import Client
+import os 
 
-class TextLocalSender:
+class TextLocal:
     def __init__(self,api_key ,sender, message,list_number: list):
         self.credential = {
             "api_key":api_key,
@@ -20,7 +23,7 @@ class TextLocalSender:
     def config_Sms(self,api_key,phone_number,message,sender):
         data = parse.urlencode({
            'apikey': api_key,
-           'list_number': phone_number,
+           'numbers': phone_number,
            'message': message,
            'sender': sender
         })
@@ -36,7 +39,7 @@ class TextLocalSender:
             send = self.config_Sms(self.credential["api_key"],phone_number,self.message,self.credential["sender"])
             tqdm.write(f"Logs of sending process \n sent to phone number {phone_number} \n Responding SMS {send} ")
 
-class NexmoSender:
+class Nexmo:
     def __init__(self,api_key, secret_key,sender,message: str,list_number):
         self.credential = {
                 "api_key":api_key,
@@ -68,4 +71,56 @@ class NexmoSender:
                     tqdm.write(f"the sms was sent succssfully to phone_number:{phone_number}")
                 else:
                     tqdm.write(f"Sms failde to send Error is :{Responding_sms['messages'][0]['error-text']}")
+
+class Tillow:
+    def __init__(self,account_sid,auth_token,twillo_number,list_number):
+        self.apikey = account_sid
+        self.auth_token = auth_token 
+        self.number_account = twillo_number
+        self.phone_number = self.read_file(list_number)
+
+    @staticmethod
+    def read_file(list_number):
+        with open(list_number,'r') as file:
+            phone_number = [line.strip() for line in file.readlines()]
+            return phone_number
+
+    def __call__(self):
+        Client = Client(self.apikey,self.auth_token)
+        for phone_number in tqdm(self.phone_number):
+            try:
+                SmsClient = Client.message.create(
+                "to"= phone_number
+                "from" = self.twillo_number
+                "body"= self.message         
+                )
+                if SmsClient.status == "sent"
+                    tqdm.write(f"the SMS was sent to phone number : {phone_number} ")
+            except ValueError():
+                tqdm.write(f"invalide number or check API auth ")
+class TextBlet:
+    def __init__(self,api_auth , message , list_number):
+
+        self.api_auth = api_auth 
+        self.message = message
+        self.phone_number = self.read_file(list_number)
+
+     @staticmethod
+    def read_file(list_number):
+        with open(list_number,'r') as file:
+            phone_number = [line.strip() for line in file.readlines()]
+            return phone_number
+
+    def __call__(self):
+        for phone_number in tqdm(self.phone_number)
+            Responding_sms = requests.post('https://textbelt.com/text'.{
+            'phone': phone_number,
+            'message':self.message
+            'key': self.api_auth
+            })
+            status = json.loads(Responding_sms)
+            if status["status"] == 'true':
+                tqdm.write(f"the SMS was sent succssfully to phone number : {phone_number}")
+            else:
+                tqdm.write("invalide number")
 
