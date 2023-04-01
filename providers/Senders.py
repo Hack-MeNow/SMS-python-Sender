@@ -6,6 +6,11 @@ import vonage
 import json
 from twilio.rest import Client
 import os 
+from colored import fg, bg, attr
+
+RED = fg('red')
+GREEN = fg('green')
+WHITE = fg('white')
 
 class TextLocal:
     def __init__(self,api_key ,sender, message,list_number: list):
@@ -20,6 +25,8 @@ class TextLocal:
     def read_file(file_list_number):
         with open(file_list_number,'r') as file:
             phone_number = [line.strip() for line in file.readlines()]
+            return phone_number
+
     def config_Sms(self,api_key,phone_number,message,sender):
         data = parse.urlencode({
            'apikey': api_key,
@@ -31,13 +38,18 @@ class TextLocal:
         request = re.Request("https://api.textlocal.in/send/?")
         send_sms = re.urlopen(request, data)
         respond = send_sms.read()
-
         return respond
+
     def sms_sender(self):
         for phone_number in tqdm(self.list_number):
             message = "happy new year to us "
             send = self.config_Sms(self.credential["api_key"],phone_number,self.message,self.credential["sender"])
-            tqdm.write(f"Logs of sending process \n sent to phone number {phone_number} \n Responding SMS {send} ")
+            send_= json.loads(send)
+    
+            if send_['status'] == "success":
+                tqdm.write(f"{GREEN} sent : {WHITE } SMS to {phone_number} ")
+            elif send_['errors'][0]['code'] == 3:
+                tqdm.write(f"{RED} Error : {WHITE} SMS failure invalide credential or numbers")
 
 class Nexmo:
     def __init__(self,api_key, secret_key,sender,message: str,list_number):
@@ -68,11 +80,11 @@ class Nexmo:
                 })
             ### check the status responding request
                 if Responding_sms["messages"][0]["status"] == "0":
-                    tqdm.write(f"the sms was sent succssfully to phone_number:{phone_number}")
+                    tqdm.write(f" {GREEN} Sent : {WHITE} SMS to phone_number:{phone_number}")
                 else:
-                    tqdm.write(f"Sms failde to send Error is :{Responding_sms['messages'][0]['error-text']}")
+                    tqdm.write(f"{RED} failure to send Error is :{WHITE} {Responding_sms['messages'][0]['error-text']}")
 
-class Tillow:
+class Twillo:
     def __init__(self,account_sid,auth_token,twillo_number,message,list_number):
         self.apikey = account_sid
         self.auth_token = auth_token 
@@ -96,9 +108,9 @@ class Tillow:
                 to = phone_number
                 )
                 if SmsClient.status == "sent":
-                    tqdm.write(f"the SMS was sent to phone number : {phone_number} ")
+                    tqdm.write(f"{GREEN} Sent :{WHITE} SMS to phone number : {phone_number} ")
             except ValueError():
-                tqdm.write(f"invalide number or check API auth ")
+                tqdm.write(f"{RED} Error :{WHITE} invalide number or check API auth ")
 class TextBlet:
     def __init__(self,api_auth , message , list_number):
 
@@ -121,7 +133,7 @@ class TextBlet:
             })
             status = json.loads(Responding_sms)
             if status["status"] == 'true':
-                tqdm.write(f"the SMS was sent succssfully to phone number : {phone_number}")
+                tqdm.write(f"{GREEN} Sent: {WHITE} SMS to phone number : {phone_number}")
             else:
-                tqdm.write("invalide number")
+                tqdm.write("{RED} Error: {WHITE} invalide number")
 

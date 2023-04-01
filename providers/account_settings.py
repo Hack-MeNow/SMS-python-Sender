@@ -53,11 +53,11 @@ class TwilloAccount:
                 'api_auth': self.api_auth,
                 'twillo number': self.twillo_number
                 }
-        for ket , value in info_account.items():
+        for key , value in info_account.items():
             print(f"{key} : {value}")
 
 class TextBletAccount:
-    []
+        pass
         
 
 
