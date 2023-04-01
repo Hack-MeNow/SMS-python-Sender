@@ -4,7 +4,7 @@ import requests
 from tqdm import tqdm
 import vonage
 import json
-from twillo.rest import Client
+from twilio.rest import Client
 import os 
 
 class TextLocal:
@@ -73,10 +73,11 @@ class Nexmo:
                     tqdm.write(f"Sms failde to send Error is :{Responding_sms['messages'][0]['error-text']}")
 
 class Tillow:
-    def __init__(self,account_sid,auth_token,twillo_number,list_number):
+    def __init__(self,account_sid,auth_token,twillo_number,message,list_number):
         self.apikey = account_sid
         self.auth_token = auth_token 
         self.number_account = twillo_number
+        self.message = message
         self.phone_number = self.read_file(list_number)
 
     @staticmethod
@@ -85,16 +86,16 @@ class Tillow:
             phone_number = [line.strip() for line in file.readlines()]
             return phone_number
 
-    def __call__(self):
+    def sms_sender(self):
         Client = Client(self.apikey,self.auth_token)
         for phone_number in tqdm(self.phone_number):
             try:
                 SmsClient = Client.message.create(
-                "to"= phone_number,
-                "from" = self.twillo_number,
-                "body"= self.message         
+                body = self.message,
+                from_ = self.twillo_number,
+                to = phone_number
                 )
-                if SmsClient.status == "sent"
+                if SmsClient.status == "sent":
                     tqdm.write(f"the SMS was sent to phone number : {phone_number} ")
             except ValueError():
                 tqdm.write(f"invalide number or check API auth ")
@@ -105,15 +106,15 @@ class TextBlet:
         self.message = message
         self.phone_number = self.read_file(list_number)
 
-     @staticmethod
+    @staticmethod
     def read_file(list_number):
         with open(list_number,'r') as file:
             phone_number = [line.strip() for line in file.readlines()]
             return phone_number
 
-    def __call__(self):
-        for phone_number in tqdm(self.phone_number)
-            Responding_sms = requests.post('https://textbelt.com/text'.{
+    def sms_sender(self):
+        for phone_number in tqdm(self.phone_number):
+            Responding_sms = requests.post('https://textbelt.com/text',{
             'phone': phone_number,
             'message':self.message,
             'key': self.api_auth

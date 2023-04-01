@@ -12,19 +12,16 @@ www.twillo.com ==> api-account {
 """
 import json
 
-class TextLocal:
-    def __init__(self, api_key,username=None, password=None,Sender=None):
+class TextLocalAccount:
+    def __init__(self, api_key,Sender=None):
         self.api_key = api_key
-        self.username = username
-        self.password = password
         if Sender == "Dofus":
             self.Sender = "Dofus"
         else:
             self.Sender = Sender
-    def info_settings(self):
+
+    def credential(self):
         info_account = {
-                'username': self.username,
-                'password': self.password,
                 'Api_key': self.api_key,
                 'Sender': self.Sender
                 }
@@ -60,7 +57,7 @@ class TwilloAccount:
             print(f"{key} : {value}")
 
 class TextBletAccount:
-    pass
+    []
         
 
 
