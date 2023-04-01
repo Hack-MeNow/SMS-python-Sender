@@ -90,8 +90,8 @@ class Tillow:
         for phone_number in tqdm(self.phone_number):
             try:
                 SmsClient = Client.message.create(
-                "to"= phone_number
-                "from" = self.twillo_number
+                "to"= phone_number,
+                "from" = self.twillo_number,
                 "body"= self.message         
                 )
                 if SmsClient.status == "sent"
@@ -115,7 +115,7 @@ class TextBlet:
         for phone_number in tqdm(self.phone_number)
             Responding_sms = requests.post('https://textbelt.com/text'.{
             'phone': phone_number,
-            'message':self.message
+            'message':self.message,
             'key': self.api_auth
             })
             status = json.loads(Responding_sms)
