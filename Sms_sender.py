@@ -67,18 +67,91 @@ def main():
                                    message,
                                    phone_numbers)
             Provider.sms_sender()
+            print("Wait Please to another sending SMS tool will automatically Re-load")
+            time.sleep(8)
             return main()
-            
 
+        elif Choices_API == "2":
+            Clear()
+            tillow_api = config['Tillow']['account_sid']
+            tillow_token = config['Tillow']['token_key']
+            tillow_number = config['Tillow']['Tillow_number']
+            print(f"APi info SMS Provider : \n")
+            info_cred = TillowAccount(tillow_api,tillow_token,tillow_number).credential() 
+            phone_numbers , message = Inputs()
+            Provider = Tillow(tillow_api,
+                                tillow_token,
+                                tillow_number,
+                                message,
+                                phone_numbers)
+            
+            Provider.sms_sender()
+            print("Wait Please to another sending SMS tool will automatically Re-load")
+            time.sleep(8)
+            return main()
+
+        elif Choices_API == "3":
+            Clear()
+            txtlocal_api = config['Textlocal']['api_key']
+            txtlocal_sender = config['Textlocal']['sender']
+            print("API info SMS Provider: \n")
+            info_cred = TextlocalAccount(txtlocal_api,txtlocal_sender).credential()
+            phone_numbers , message = Inputs()
+            Provider = Textlocal(txtlocal_api, 
+                                 txtlocal_sender, 
+                                 message, 
+                                 phone_numbers)
+
+            Provider.sms_sender()
+            print("Wait Please to another sending SMS tool will automatically Re-load")
+            time.sleep(8)
+            return main()
+
+        elif Choices_API == "4":
+            Clear()
+            textblte_api = config['textbelt']['api_key']
+            print(f"API info SMS Provider : \n {textblte_api} ")
+            phone_numbers , message = Inputs()
+            Provider = TextBelt(textblte_api , message , phone_numbers)
+            Provider.sms_sender()
+            print("Wait Please to another sending SMS tool will automatically Re-load")
+            time.sleep(8)
+            return main()
+        else:
+            print("you insert invalide option the tool will reload automatically Please Wait ...")
+            time.sleep(8)
+            return main()
+
+    elif Choices == "2":
+
+        APIs = ['Nexmo','Tillow','TextLocal','Textbelt']
+        url  = "https://github.com/deep-matter/SMS-python-Sender"
+        print(f"to be able to use this tool you should have one account at least \n")
+        print(f"{[api for api in APIs ]} \n")
+        print(f"Read documenatation in Repo {url} to see how to setup account Credentials") 
+        time.sleep(8)
+        return main()
+
+    elif Choices == "3":
+        
+         Providers =  ['nexmo','tillow','textlocal','textbelt']
+         url = "https://www.example.com"
+         print(f" For more information of each API to create account see :\n")
+         print(f" Nexmo Offcial website : {url}?ref={Providers[0]} \n")
+         print(f" Tillow Offcial website : {url}?ref={Providers[1]} \n")
+         print(f" Textlocal Offcial website : {url}?ref={Providers[2]} \n")
+         print(f" Textbelt Offcial website : {url}?ref={Providers[3]} \n")
+         time.sleep(8)
+         return main()
+    else:
+        print("you insert invalide option the tool will reload automatically Please Wait ...")
+        time.sleep(8)
+        return main()
+
+
+        
 
 
 
 if __name__ == "__main__":
     main()  
-    
-
-
-
-
-
-
