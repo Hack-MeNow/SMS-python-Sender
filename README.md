@@ -35,6 +35,24 @@ The tool created to Send SMS and Verification numbers , to be able to use the to
   * [**textlocal**](https://www.textlocal.com)
   * [**Textbelt**](https://www.Textbelt.com)
 
+after get the API Credentials you have to Put the Secrets in Configuration File called **APIs_Accounts_Credentials.cfg**
+
+**Note** : Avoid using "" this when you put Credentials and make sure read Documentation AAPI
+```YAML
+  [Textlocal]
+  api_key=  your-generated-key
+  sender = Dofus
+  [Nexmo]
+  api_key =  your-generated-key
+  secret_key =  your-secret-key
+  sender = Your-Sener-Name
+  [Twillo]
+  account_sid= your-generated-key
+  token_key = "your-token-key"
+  Twillo_number = "your Twillo number"
+  [textbelt]
+  api_key = "your-generated-key"
+```
 * **How to USE Tool:**
 when you run the tool will show options , **SMS-python-Sender** provide many Providers APIs Senders , choice one you have **Credential API**
 
@@ -43,4 +61,10 @@ when you run the tool will show options , **SMS-python-Sender** provide many Pro
     - **FILE LIST NUMBERS** : you need to setup **list_number.txt** and set all the phone numbers you want to send SMS and **MAKE SURE TO WRITE NUMBER WITH COUNTRY CODE**
 
 2. **EORRO HANDLING**
-this tool is take considration of EORRR HANDLING which means it handle the respond Status if **SENT** or **ERROR**
+this tool is take considration of EORRO HANDLING which means it handle the respond Status if **SENT** or **ERROR**
+    - Screenshot ERROR HANDLING: 
+        ![alt text](test/Screenshot_t.png)
+3. **ScreenShot**
+
+
+
