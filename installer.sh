@@ -2,6 +2,12 @@
 #!/bin/bash
 
 # Function to display help information
+info_tool() {
+    echo "we hope the tool was used in right purpose"
+    echo "any addtional informations Please Visit the Offciale Website"
+    echo "https://github.com/deep-matter/SMS-python-Sender"
+    echo "Exit from tool"
+}
 show_help() {
     echo "Usage: installer.sh [OPTION]"
     echo "Install or run the SMS Sender tool."
@@ -48,7 +54,8 @@ run() {
     fi
 
     # Run the SMS Sender tool
-    python3.10 ./scr/Sms_sender.py
+    cd src/
+    python3.10 Sms_sender.py
 }
 
 # Parse command line options
@@ -78,5 +85,5 @@ done
 
 # If no options are provided, display help information
 if [[ $# -eq 0 ]]; then
-    show_help
+    info_tool
 fi

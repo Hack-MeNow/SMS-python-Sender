@@ -1,5 +1,5 @@
-from .providers.Senders import * 
-from .providers.account_settings import * 
+from providers.Senders import * 
+from providers.account_settings import * 
 from configparser import ConfigParser 
 from termcolor import colored
 import sys  
@@ -59,9 +59,9 @@ def main():
         if Choices_API == "1":
             Clear()
            # get the APIs Credential
-            Nexmo_api = config['Nexmo_api']['api_key']
-            Nexmo_secret = config['Nexmo_api']['secret_key']
-            Nexmo_Sender = config['Nexmo_api']['sender']
+            Nexmo_api = config['Nexmo']['api_key']
+            Nexmo_secret = config['Nexmo']['secret_key']
+            Nexmo_Sender = config['Nexmo']['sender']
             print("info Provider API and secret key \n")
             info_cred = Nexmo_config(Nexmo_api,Nexmo_secret,Nexmo_Sender).credential()
             phone_numbers , message = Inputs()
