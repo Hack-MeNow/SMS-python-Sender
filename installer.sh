@@ -48,7 +48,7 @@ run() {
     fi
 
     # Run the SMS Sender tool
-    python3.10 Sms_sender.py
+    python3.10 ./scr/Sms_sender.py
 }
 
 # Parse command line options
