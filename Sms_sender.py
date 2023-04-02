@@ -153,11 +153,6 @@ def main():
         time.sleep(8)
         return main()
 
-
-        
-
-
-
 if __name__ == "__main__":
     try:
         main()
