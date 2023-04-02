@@ -1,5 +1,5 @@
-from providers.Senders import * 
-from providers.account_settings import * 
+from .providers.Senders import * 
+from .providers.account_settings import * 
 from configparser import ConfigParser 
 from termcolor import colored
 import sys  
