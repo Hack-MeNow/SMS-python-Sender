@@ -1,0 +1,8 @@
+termcolor
+vonage
+twilio
+colored
+requests
+tqdm
+
+
