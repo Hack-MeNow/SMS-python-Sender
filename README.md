@@ -64,9 +64,10 @@ when you run the tool will show options , **SMS-python-Sender** provide many Pro
 2. **EORRO HANDLING**
 this tool is take considration of EORRO HANDLING which means it handle the respond Status if **SENT** or **ERROR**
     - Screenshot ERROR HANDLING: 
-        ![alt text](test/screenshot_t.png)
+        ![alt text](test/Screenshot_t.png)
+
 3. **ScreenShot**
-        ![alt text](test/screenshot.png)
+        ![alt text](test/Screenshot.png)
 
 
 
