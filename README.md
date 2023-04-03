@@ -59,12 +59,14 @@ when you run the tool will show options , **SMS-python-Sender** provide many Pro
 1. **OPTIONS**
     - **(1)** : is allowing to choice one APIs to send 
     - **FILE LIST NUMBERS** : you need to setup **list_number.txt** and set all the phone numbers you want to send SMS and **MAKE SURE TO WRITE NUMBER WITH COUNTRY CODE**
+    - **(2)** : Phone validation to ensure the SMS will deliver into existence phone . after chose this check **Output** Folder to use filtering phone **True**
 
 2. **EORRO HANDLING**
 this tool is take considration of EORRO HANDLING which means it handle the respond Status if **SENT** or **ERROR**
     - Screenshot ERROR HANDLING: 
-        ![alt text](test/Screenshot_t.png)
+        ![alt text](test/screenshot_t.png)
 3. **ScreenShot**
+        ![alt text](test/screenshot.png)
 
 
 
