@@ -5,7 +5,8 @@ from termcolor import colored
 import sys  
 import random
 import time
-import os
+import os 
+from providers.verification import *
 
 def Screen_log():
     color_logo = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
@@ -31,10 +32,8 @@ def Clear():
     os.system("clear")
     Screen_log()
     time.sleep(1)
-
-def PrintC(message , Color):
-    pass
-
+    
+                       
 def Inputs():
     phone_numbers = input("add the path list numbers: ")
     message = input("write the message SMS to send: ")
@@ -46,6 +45,7 @@ def main():
     config.read("APIs_Accounts_Credentials.cfg") 
     Clear()
     print("1: Send SMS with different API providers")
+    print("2: Phone Validation ")
     print("2: Help")
     print("3: more info about APIs send SMS-Providers Config")
     print("4: Exiting from tool Press CTRL + C ")
@@ -127,8 +127,18 @@ def main():
             print("you insert invalide option the tool will reload automatically Please Wait ...")
             time.sleep(8)
             return main()
-
     elif Choices == "2":
+         Clear()
+         phone_number = input("inster the path list number : ")
+         df,df_ = phone_validation(phone_number)
+         print(colored("succssed Filtering check output Folder","green"))
+         #API_Number(phone_number)
+
+         print("the tool will Re-Load Please wait ... ")
+         time.sleep(10)
+         return main()
+
+    elif Choices == "3":
         Clear()
         APIs = ['Nexmo','Tillow','TextLocal','Textbelt']
         url  = "https://github.com/deep-matter/SMS-python-Sender"
@@ -138,7 +148,7 @@ def main():
         time.sleep(8)
         return main()
 
-    elif Choices == "3":
+    elif Choices == "4":
          Clear()
          Providers =  ['nexmo','tillow','textlocal','textbelt']
          print(f" For more information of each API to create account see :\n")
