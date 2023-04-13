@@ -33,7 +33,7 @@ def phone_validation(phone_list):
         DataNumbers['timezone'].append(timeZone)
         valid_number = phonenumbers.is_valid_number(phone)
         possible_number = phonenumbers.is_possible_number(phone)
-        if valid_number == "True":
+        if valid_number == "False":
             DataNumbers['valid_number'].append('True')
         else:
             DataNumbers['valid_number'].append('False')
