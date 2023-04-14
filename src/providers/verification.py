@@ -11,7 +11,7 @@ import requests
 
 def read_file(file_list_number):
     with open(file_list_number,'r') as file:
-        phone_number = [line.strip() for line in file.readlines()]
+        phone_number = ['+' + line.strip() for line in file.readlines()]
     return phone_number
 
 def phone_validation(phone_list):
@@ -33,18 +33,12 @@ def phone_validation(phone_list):
         DataNumbers['timezone'].append(timeZone)
         valid_number = phonenumbers.is_valid_number(phone)
         possible_number = phonenumbers.is_possible_number(phone)
-        if valid_number == "True":
-            DataNumbers['valid_number'].append('True')
-        else:
-            DataNumbers['valid_number'].append('False')
-        if possible_number == "True":
-            DataNumbers['possible_number'].append('True')
-        else:
-            DataNumbers['possible_number'].append('False')
+        DataNumbers['valid_number'].append(valid_number)
+        DataNumbers['possible_number'].append(possible_number)
     DataNumbers['phone_number']= phone_number
     # convert to dataframe and filtter only Valide number
     df = pd.DataFrame(DataNumbers).set_index('phone_number')
-    df_= df[df['valid_number'] == 'True'] 
+    df_= df[df['valid_number'] == True]
     # Save the File Execl with all the Columns
     if os.path.exists('output'):
         shutil.rmtree('output')
